@@ -15,8 +15,9 @@
   up = pull
   br = branch
   df = diff
-  lg = log -p
   aa = add --all
+  l = "!source ~/.githelpers && pretty_git_log"
+  unstage = reset HEAD
 
 [color]
   ui = true
@@ -29,6 +30,12 @@
 
 [diff "ruby"]
   funcname = ^ *\\(\\(class\\|module\\|def\\) .*\\)
+
+[push]
+  default = upstream
+
+[branch]
+  autosetuprebase = always
 
 [url "git@heroku.com:"]
   insteadOf = heroku:
