@@ -1,8 +1,8 @@
 # Load self compiled shit too
 export PATH="/usr/local/bin:$PATH"
 
-# Load Node.js bin:
-export PATH="/usr/local/lib/node_modules/npm/node_modules/coffee-script/bin:$PATH"
+# Load Node.js bin and NPM:
+export PATH="/usr/local/share/npm/bin:/usr/local/lib/node_modules/npm/node_modules/coffee-script/bin:$PATH"
 export NODE_PATH="/usr/local/lib/node_modules"
 
 # I am single minded
