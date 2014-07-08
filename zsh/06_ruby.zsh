@@ -1,9 +1,3 @@
-# Ruby Enterprise Edition Optimalizations
-export RUBY_HEAP_MIN_SLOTS=1100000
-export RUBY_GC_MALLOC_LIMIT=110000000
-export RUBY_HEAP_FREE_MIN=20000
-export RUBY_HEAP_SLOTS_GROWTH_FACTOR=1
-
 # open stuff with vim
 export BUNDLER_EDITOR='vim'
 export GEMEDITOR='vim'
