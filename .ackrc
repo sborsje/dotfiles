@@ -1,14 +1,8 @@
-# SEARCH ALL THE THINGS
---all-types
-
 # Only search with case sensitivity if there is mixed case.
 --smart-case
 
 # Follow symlinks.
 --follow
-
-# Highlight matches
---color
 
 # Some basic ignores.
 --ignore-dir=log
@@ -19,6 +13,8 @@
 --type-add=html=.html.erb
 --type-add=js=.js.erb
 --type-add=ruby=.rake,.rsel,.builder
+
+# Some more types
 --type-set=coffee=.coffee
 --type-set=cucumber=.feature
 --type-set=haml=.haml
