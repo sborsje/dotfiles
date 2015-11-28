@@ -20,6 +20,9 @@ alias ducks='du -cks * | sort -nr'
 alias less='less -R' # correctly interpret ASCII color escapes
 alias nyan="TERM=1 telnet miku.acm.uiuc.edu"
 alias grep='grep --colour=always'
+function ghc {
+  git clone git@github.com:$1.git
+}
 
 # Misc
 alias hosts='sudo vim /etc/hosts'
