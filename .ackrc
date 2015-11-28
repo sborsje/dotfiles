@@ -5,7 +5,6 @@
 --follow
 
 # Some basic ignores.
---ignore-dir=log
 --ignore-dir=tmp
 --ignore-dir=coverage
 
