@@ -1,0 +1,11 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhist_cnt =9
+let g:netrw_dirhist_1='/Users/sborsje/Downloads/nRF51_SDK_10.0.0_dc26b5e/examples/peripheral/led_softblink'
+let g:netrw_dirhist_2='/Users/sborsje/Downloads/nRF51_SDK_10.0.0_dc26b5e/examples/peripheral/led_softblink/pca10028'
+let g:netrw_dirhist_3='/Users/sborsje/Downloads/nRF51_SDK_10.0.0_dc26b5e/examples/peripheral/led_softblink/pca10028/s110'
+let g:netrw_dirhist_4='/Users/sborsje/Downloads/nRF51_SDK_10.0.0_dc26b5e/examples/peripheral/led_softblink/pca10028/s110/armgcc'
+let g:netrw_dirhist_5='/Users/sborsje/Downloads/nRF51_SDK_10.0.0_dc26b5e/examples/peripheral/led_softblink/pca10028/s110'
+let g:netrw_dirhist_6='/Users/sborsje/Downloads/nRF51_SDK_10.0.0_dc26b5e/examples/peripheral/led_softblink/pca10028'
+let g:netrw_dirhist_7='/Users/sborsje/Downloads/nRF51_SDK_10.0.0_dc26b5e/examples/peripheral/led_softblink'
+let g:netrw_dirhist_8='/Users/sborsje/Downloads/nRF51_SDK_10.0.0_dc26b5e/examples/peripheral/low_power_pwm'
+let g:netrw_dirhist_9='/Users/sborsje/Projects/goworkspace/src/code.yourkarma-private.com/karmad/src/firewall'

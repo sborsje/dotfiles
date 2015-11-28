@@ -27,6 +27,7 @@ call vundle#rc()
 
 " let Vundle manage Vundle
 Bundle 'gmarik/vundle'
+
 Bundle 'vim-scripts/tir_black'
 Bundle 'vim-ruby/vim-ruby'
 Bundle 'kchmck/vim-coffee-script'
@@ -34,8 +35,18 @@ Bundle 'Lokaltog/vim-powerline'
 Bundle 'tpope/vim-fugitive'
 Bundle 'slim-template/vim-slim'
 Bundle 'godlygeek/tabular'
+Bundle 'groenewege/vim-less'
+Bundle 'fatih/vim-go'
+Bundle 'cespare/vim-toml'
+Bundle 'scrooloose/syntastic'
+Bundle 'kien/ctrlp.vim'
+Bundle 'wting/rust.vim'
 
 filetype plugin indent on
+
+" For some reason Vundle doesn't like ftdetect
+autocmd BufNewFile,BufRead *.slim set filetype=slim
+autocmd BufNewFile,BufRead *.less set filetype=less
 
 " --------------------------------------------------------------------------------------------------
 " General
@@ -255,6 +266,15 @@ nnoremap <leader><space> :noh<cr>
 "inoremap <tab> <c-r>=InsertTabWrapper()<cr>
 "inoremap <s-tab> <c-n>
 
+nmap ; :CtrlPBuffer<CR>
+let g:ctrlp_map = '<Leader>t'
+let g:ctrlp_match_window_bottom = 0
+let g:ctrlp_match_window_reversed = 0
+let g:ctrlp_custom_ignore = '\v\~$|\.(o|swp|pyc|wav|mp3|ogg|blend)$|(^|[/\\])\.(hg|git|bzr)($|[/\\])|__init__\.py'
+let g:ctrlp_working_path_mode = 0
+let g:ctrlp_dotfiles = 0
+let g:ctrlp_switch_buffer = 0
+
 " --------------------------------------------------------------------------------------------------
 " Convert tabs to spaces
 " --------------------------------------------------------------------------------------------------
@@ -267,6 +287,21 @@ nnoremap <leader><space> :noh<cr>
 "  call setreg('/', old_query)
 "endfunction
 "noremap <leader>t :call TabsToSpaces ()<CR>
+
+" --------------------------------------------------------------------------------------------------
+" vim-rspec
+" --------------------------------------------------------------------------------------------------
+
+map <Leader>rt :call RunCurrentSpecFile()<CR>
+map <Leader>rs :call RunNearestSpec()<CR>
+map <Leader>rl :call RunLastSpec()<CR>
+map <Leader>ra :call RunAllSpecs()<CR>
+
+" --------------------------------------------------------------------------------------------------
+" vim-go
+" --------------------------------------------------------------------------------------------------
+
+let g:go_fmt_command = "goimports"
 
 " --------------------------------------------------------------------------------------------------
 " Strip trailing whitespace (,s)
@@ -285,21 +320,21 @@ noremap <leader>s :call StripWhitespace ()<CR>
 " Show tabs and trailing whitespace
 " --------------------------------------------------------------------------------------------------
 
-if (&termencoding == "utf-8") || has("gui_running")
-  if v:version >= 700
-    if has("gui_running")
-      set list listchars=tab:▸\ ,trail:·,extends:…,nbsp:‗
-    else
-      " xterm + terminus hates these
-      set list listchars=tab:»·,trail:·,extends:>,nbsp:_
-    endif
-  else
-    set list listchars=tab:»·,trail:·,extends:…
-  endif
-else
-  if v:version >= 700
-    set list listchars=tab:>-,trail:.,extends:>,nbsp:_
-  else
-    set list listchars=tab:>-,trail:.,extends:>
-  endif
-endif
+" if (&termencoding == "utf-8") || has("gui_running")
+"   if v:version >= 700
+"     if has("gui_running")
+"       set list listchars=tab:▸\ ,trail:·,extends:…,nbsp:‗
+"     else
+"       " xterm + terminus hates these
+"       set list listchars=tab:»·,trail:·,extends:>,nbsp:_
+"     endif
+"   else
+"     set list listchars=tab:»·,trail:·,extends:…
+"   endif
+" else
+"   if v:version >= 700
+"     set list listchars=tab:>-,trail:.,extends:>,nbsp:_
+"   else
+"     set list listchars=tab:>-,trail:.,extends:>
+"   endif
+" endif
