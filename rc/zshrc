@@ -1,0 +1,216 @@
+dotfiles_dir="$(dirname "$(dirname "$(readlink ~/.hushlogin)")")"
+
+########################################
+# BASE CONFIG
+#
+
+HISTFILE=~/.zhistory
+HISTSIZE=10000
+SAVEHIST=10000
+
+# Directory Changing options
+setopt AUTO_CD # Automatically cd in to directories if it's not a command name.
+setopt AUTO_PUSHD # Automatically push visited directories to the stack.
+setopt PUSHD_IGNORE_DUPS # ...and don't duplicate them.
+
+# History Options
+setopt APPEND_HISTORY # Don't overwrite history.
+setopt HIST_VERIFY # Verify commands that use a history expansion.
+setopt EXTENDED_HISTORY # Remember all sorts of stuff about the history.
+setopt INC_APPEND_HISTORY # Incrementally append commands to the history.
+setopt HIST_IGNORE_SPACE # Ignore commands with leading spaces.
+setopt HIST_IGNORE_ALL_DUPS # Ignore all duplicate entries in the history.
+setopt HIST_REDUCE_BLANKS # Tidy up commands before comitting them to history.
+
+# Misc
+setopt NO_BEEP # Never, ever, beep at me.
+setopt NOMATCH # If a pattern for filename generation has no matches, print an error
+
+# No idea what this does. Copy paste it anyway ¯\_(ツ)_/¯
+setopt MULTIBYTE
+setopt EXTENDED_GLOB # Give meaning to lots of crazy characters.
+unsetopt FLOW_CONTROL
+
+# Prefer US English and use UTF-8.
+export LANG="en_US.UTF-8"
+export LC_ALL="en_US.UTF-8"
+
+########################################
+# PROMPT
+#
+
+# Used mainly in prompt coloring
+export reset=$'%{\e[0;00m%}'
+export gray=$'%{\e[0;90m%}'
+export red=$'%{\e[0;31m%}'
+export green=$'%{\e[0;32m%}'
+export yellow=$'%{\e[0;33m%}'
+export blue=$'%{\e[0;34m%}'
+export magenta=$'%{\e[0;35m%}'
+export cyan=$'%{\e[0;36m%}'
+export white=$'%{\e[0;37m%}'
+
+setopt PROMPT_SUBST # Expand parameters within prompts.
+PROMPT='$(${dotfiles_dir}/script/prompt $?)'
+
+
+########################################
+# COLORS
+#
+
+export CLICOLOR=1
+
+# Shell Theme
+source "${dotfiles_dir}/themes/base16-shell/base16-flat.dark.sh"
+
+# Actually just here for zsh colored completion
+export LS_COLORS='no=00:fi=00:di=00;34:ln=00;36:pi=40;33:so=00;35:bd=40;33;01:cd=40;33;01:or=01;05;37;41:mi=01;05;37;41:ex=00;35:*.rb=00;31'
+
+
+########################################
+# COMPLETION
+#
+
+setopt AUTO_LIST        # Always automatically show a list of ambiguous completions.
+setopt COMPLETE_IN_WORD # Complete items from the beginning to the cursor.
+
+autoload -Uz compinit
+compinit
+
+
+########################################
+# VARIABLES
+#
+
+if [ -d "$HOME/Code/go" ]; then
+  export GOPATH=$HOME/Code/go
+  export PATH=$PATH:$GOPATH/bin
+fi
+
+# I like VIM
+export EDITOR=vim
+export VISUAL=vim
+export GIT_EDITOR=vim
+export SVN_EDITOR=vim
+
+
+########################################
+# ALIASES
+#
+
+alias reloadzshcfg="source ~/.zshrc"
+alias dotfiles="cd ${dotfiles_dir}"
+
+alias please="sudo"
+alias fucking="sudo"
+
+alias ll="ls -alh"
+alias sl="ll"
+alias l="ll"
+
+alias ..="cd .."
+alias ...="cd ../.."
+alias ....="cd ../../.."
+alias .....="cd ../../../.."
+alias ......="cd ../../../../.."
+
+alias mv="mv -i"
+alias rm="rm -i"
+
+alias tf="tail -f -n 0"
+alias ducks="du -cks * | sort -nr"
+
+alias less="less -R" # correctly interpret ASCII color escapes
+
+alias grep="grep --colour=always"
+
+function ghc {
+  git clone git@github.com:$1.git
+}
+
+# Awk shortcuts, creates col1 .. col20
+for (( i = 0 ; i <= 20 ; i++ )); do alias "col$i"="awk '{print \$$i}'"; done
+
+# Prefer colordiff
+[[ -x $(which colordiff) ]] && alias diff="colordiff -u" || alias diff="diff -u"
+
+# grep for a process
+function psg {
+  ps aux | grep "${1}"
+}
+
+# Extract archived files / mounts disk images
+# credit: http://nparikh.org/notes/zshrc.txt
+function smartextract {
+  if [ -f $1 ]; then
+    case $1 in
+      *.tar.bz2)  tar -jxvf $1        ;;
+      *.tar.gz)   tar -zxvf $1        ;;
+      *.bz2)      bunzip2 $1          ;;
+      *.dmg)      hdiutil mount $1    ;;
+      *.gz)       gunzip $1           ;;
+      *.tar)      tar -xvf $1         ;;
+      *.tbz2)     tar -jxvf $1        ;;
+      *.tgz)      tar -zxvf $1        ;;
+      *.zip)      unzip $1            ;;
+      *.Z)        uncompress $1       ;;
+      *)          echo "'$1' cannot be extracted/mounted via smartextract()" ;;
+    esac
+  else
+    echo "'$1' is not a valid file"
+  fi
+}
+
+alias myip_external="dig +short myip.opendns.com @resolver1.opendns.com"
+alias myip_wifi="ipconfig getifaddr en0"
+alias myips="ifconfig -a | grep -o 'inet6\? \(addr:\)\?\s\?\(\(\([0-9]\+\.\)\{3\}[0-9]\+\)\|[a-fA-F0-9:]\+\)' | awk '{ sub(/inet6? (addr:)? ?/, \"\"); print }'"
+
+########################################
+# TERM TITLE
+#
+
+case $TERM in (*xterm*|ansi)
+  function settab { print -Pn "\e]1;%m: %~\a" }
+  function settitle { print -Pn "\e]2;%n@%m: %~\a" }
+  function preexec { print -Pn "\e]1;%m:$(history $HISTCMD | cut -b7- ) \a" }
+  function precmd { settab; settitle }
+  ;;
+esac
+
+
+########################################
+# RUBY
+#
+
+alias be='bundle exec'
+
+# I've switched to pry
+alias irb='pry'
+
+# rbenv support
+if which rbenv > /dev/null; then
+  eval "$(rbenv init - zsh --no-rehash)";
+fi
+
+
+########################################
+# OSX SPECIFIC
+#
+
+if [[ "${OSTYPE}" == "darwin"* ]]; then
+  # Key bindings
+  bindkey '^[[H' beginning-of-line
+  bindkey '^[[F' end-of-line
+
+  # Add Swift to path
+  export PATH=/Library/Developer/Toolchains/swift-latest.xctoolchain/usr/bin:"${PATH}"
+fi
+
+
+########################################
+# LOCAL OVERRIDES
+#
+
+for f in $(find "${dotfiles_dir}/local" \( -name \*.sh -o -name \*.zsh \) -print); do
+  source "${f}"
+done

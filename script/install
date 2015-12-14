@@ -1,0 +1,101 @@
+#!/bin/sh
+#set -e
+#set -u
+
+mydir="$(pwd)"
+backup="$HOME/.dotfiles-backup-`date +%s`"
+
+if [[ "${OSTYPE}" == "linux-gnu" ]]; then
+  OS="linux"
+elif [[ "${OSTYPE}" == "darwin"* ]]; then
+  OS="osx"
+else
+  echo "ERROR: Setting up dotfiles for this OS (${OSTYPE}) is not supported :("
+  exit 1
+fi
+
+git_setup() {
+  while true; do
+    read -p "Please enter your full name: " git_author_name
+    read -p "Please enter your email: " git_author_email
+
+    while true; do
+      read -p "Does this look correct? [y/n] " yn
+      case $yn in
+        [Yy]* ) break 2;;
+        [Nn]* ) break;;
+        * ) echo "Please answer y or n.";;
+      esac
+    done
+  done
+
+  read -r -d '' git_info << EOF
+export GIT_AUTHOR_NAME="${git_author_name}"
+export GIT_AUTHOR_EMAIL="${git_author_email}"
+export GIT_COMMITTER_NAME=\$GIT_AUTHOR_NAME
+export GIT_COMMITTER_EMAIL=\$GIT_AUTHOR_EMAIL
+EOF
+  echo "${git_info}" > "${mydir}/local/00-git.sh"
+}
+
+zsh_setup() {
+  if hash zsh 2>/dev/null; then
+    chsh -s $(which zsh)
+  else
+    echo "ERROR: Could not find ZSH!"
+  fi
+}
+
+echo "\n*** Installing dotfiles ***\n"
+
+while true; do
+  read -p "Do you wish to install/overwrite your current dotfiles? [y/n] " yn
+  case "${yn}" in
+    [Yy]* ) break;;
+    [Nn]* ) echo "\n*** Dotfiles installation cancelled! ***\n"; exit;;
+    * ) echo "Please answer y or n.";;
+  esac
+done
+
+for f in $(find "${mydir}/rc" -type f); do
+  file="$(basename "${f}")"
+  dest="${HOME}/.${file}"
+
+  if [[ -f "${dest}" || -d "${dest}" ]]; then
+    mkdir -p "${backup}"
+    echo "Backing up: ${dest}"
+    cp -R "${dest}" "${backup}/${file}"
+    rm -f "${dest}"
+  fi
+  echo "Symlinking: ${dest} -> ${f}"
+  ln -fs "${f}" "${dest}"
+done
+
+
+while true; do
+  read -p "Do you want to set up Git? [y/n] " yn
+  case $yn in
+    [Yy]* ) git_setup; break;;
+    [Nn]* ) break;;
+    * ) echo "Please answer y or n.";;
+  esac
+done
+
+
+if [[ "${OS}" == "osx" ]]; then
+  while true; do
+    read -p "Do you want to set up ZSH? [y/n] " yn
+    case $yn in
+      [Yy]* ) zsh_setup; break;;
+      [Nn]* ) break;;
+      * ) echo "Please answer y or n.";;
+    esac
+  done
+fi
+
+
+if [[ -d "${backup}" ]]; then
+  echo "\n\033[0;31mPlease check backups in ${backup}\033[0m"
+fi
+
+echo "\n*** Dotfiles installed! ***\n"

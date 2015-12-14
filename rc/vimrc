@@ -1,0 +1,286 @@
+set nocompatible
+
+
+" --------------------------------------
+" Vundle
+"
+
+filetype off
+
+let needsToInstallBundles=0
+if !isdirectory(expand("~/.vim/bundle/Vundle.vim"))
+  echo "\nInstalling Vim dependencies... Please be patient!\n"
+  silent !mkdir -p ~/.vim/tmp
+  silent !mkdir -p ~/.vim/swap
+  silent !mkdir -p ~/.vim/undo
+  silent !mkdir -p ~/.vim/bundle
+  silent !mkfifo ~/.vim/commands-fifo
+  silent !git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+  let needsToInstallBundles=1
+endif
+
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+
+" Do these first, because other plugins depend on them
+Plugin 'VundleVim/Vundle.vim'
+Plugin 'Syntastic'
+Plugin 'tpope/vim-fugitive'
+
+" Colorschemes
+Plugin 'chriskempson/base16-vim'
+
+" Syntax & Language Support
+Plugin 'hail2u/vim-css3-syntax'
+Plugin 'kchmck/vim-coffee-script'
+Plugin 'othree/html5-syntax.vim'
+Plugin 'slim-template/vim-slim'
+Plugin 'tpope/vim-markdown'
+Plugin 'tpope/vim-cucumber'
+Plugin 'tpope/vim-haml'
+Plugin 'vim-ruby/vim-ruby'
+Plugin 'Keithbsmiley/rspec.vim'
+Plugin 'fatih/vim-go'
+Plugin 'cespare/vim-toml'
+Plugin 'wting/rust.vim'
+Plugin 'pangloss/vim-javascript'
+Plugin 'isRuslan/vim-es6'
+Plugin 'mxw/vim-jsx'
+
+" Other
+Plugin 'godlygeek/tabular'
+Plugin 'csexton/trailertrash.vim'
+Plugin 'edsono/vim-matchit'
+Plugin 'tomtom/tcomment_vim'
+
+" Always last
+Plugin 'bling/vim-airline'
+
+call vundle#end()
+filetype plugin indent on
+
+if needsToInstallBundles == 1
+  echo "\nInstalling plugins.\n"
+  :PluginInstall
+  :GoInstallBinaries
+  echo "\nInstalled.\n"
+endif
+
+filetype plugin indent on
+
+
+" --------------------------------------
+" General
+"
+
+set encoding=utf8
+set fileencoding=utf8
+set shortmess=atI                   " Don’t show the intro message
+set history=1000                    " increase history
+set cf                              " enable error files and error jumping
+set viminfo='1000,f1,:100,@100,/20  " remember lots of stuff
+set gdefault                        " always apply substitutions globally on a line
+set autoread                        " automatically reread files that have been changed externally
+au CursorHold * checktime
+set clipboard=unnamed               " clipboard sharing in OSX
+
+
+" --------------------------------------
+" Colors / Theme
+"
+
+if &t_Co > 2 || has("gui_running")
+  syntax on
+  set hlsearch
+  set bg=dark
+  let base16colorspace=256  " Access colors present in 256 colorspace
+  colorscheme base16-flat
+  let g:airline_theme = 'base16'
+endif
+
+if has("gui_macvim")
+  set guioptions=Ace            " No menubar, toolbar or scrollbars, as minimal as possible
+  set guifont="Source Code Pro":h12 " Get Source Code here: https://github.com/adobe-fonts/source-code-pro/releases/tag/2.010R-ro%2F1.030R-it
+  set linespace=1               " Less spacing between lines
+end
+
+if &term =~ '256color'
+  " Disable Background Color Erase (BCE) so that color schemes
+  " work properly when Vim is used inside tmux and GNU screen.
+  " See also http://snk.tuxfamily.org/log/vim-256color-bce.html
+  set t_ut=
+endif
+
+
+" --------------------------------------
+" UI
+"
+
+set ruler
+set showcmd                         " display incomplete commmands
+set number
+"set numberwidth=5                   " add padding to line numbers
+set wildmenu                        " enhanced command-line completion
+set wildmode=list:longest,full
+set backspace=2                     " backspace over everything
+set report=0                        " When doing substitutions, report the number of changes
+set scrolloff=3                     " start scrolling three 3 before horizontal window border
+set sidescroll=1                    " side scroll 1 character at a time
+set sidescrolloff=15                " start sidescrolling 15 characters before end of line
+set equalalways                     " multiple windows, when created, are equal in size
+set splitbelow splitright           " change split order
+
+" Ignore these files when completing names and in Explorer
+set wildignore=.svn,CVS,.git,*.o,*.a,*.class,*.mo,*.la,*.so,*.obj,*.swp,*.jpg,*.png,*.xpm,*.gif,*.pyc,*.zip,*.gz,*.bz,*.tar,*.avi,*.wmv,*.ogg,*.mp3,*.mov
+
+
+" --------------------------------------
+" Backups
+"
+
+set backup                          " use backups
+set backupdir=~/.vim/tmp            " put backupfiles in ~/.vim/tmp
+set swapfile                        " use swapfiles
+set directory=~/.vim/swap           " put swapfiles in ~/.vim/tmp/swap
+set undofile                        " undoing even after closing the file
+set undodir=~/.vim/undo
+
+
+" --------------------------------------
+" Searching
+"
+
+set incsearch                       " do incremental searching
+set ignorecase                      " ignore case ...
+set smartcase                       " ... most of the time
+
+
+" --------------------------------------
+" Visual Cues
+"
+
+set showmatch                       " show matching braces / brackets
+set ls=2                            " always show status line
+
+
+" --------------------------------------
+" Text Formatting
+"
+
+set nowrap
+set autoindent                      " auto indent new lines
+set cindent
+set smartindent
+set smarttab
+set softtabstop=2
+set shiftwidth=2
+set tabstop=2                       " number of spaces that a <Tab> counts for
+set expandtab                       " expand tabs to spaces
+"set virtualedit=block               " allow virtual editing in blockmode
+set nojoinspaces                    " only use one space after ., ? or ! with a join command
+set noesckeys                       " recognize single <Esc> immediately
+
+
+" --------------------------------------
+" Mappings
+"
+
+" remap <LEADER> to ',' (instead of '\')
+let mapleader = ","
+
+" Stronger h
+nnoremap H 0
+" Stronger l
+nnoremap L $
+
+" turn off arrow keys in normal mode
+nnoremap <up> <nop>
+nnoremap <down> <nop>
+nnoremap <left> <nop>
+nnoremap <right> <nop>
+
+" turn off arrow keys in insert mode
+inoremap <up> <nop>
+inoremap <down> <nop>
+inoremap <left> <nop>
+inoremap <right> <nop>
+
+" turn off arrow keys in visual mode
+vnoremap <up> <nop>
+vnoremap <down> <nop>
+vnoremap <left> <nop>
+vnoremap <right> <nop>
+
+" pressing j or k in a long wrapped will put cursor down/up one visual line
+nnoremap j gj
+nnoremap k gk
+vnoremap j gj
+vnoremap k gk
+
+" make F5 reload .vimrc
+map <F5> :source ~/.vimrc<CR>
+
+" tab navigation
+nmap t1 1gt
+nmap t2 2gt
+nmap t3 3gt
+nmap t4 4gt
+nmap t5 5gt
+nmap t6 6gt
+nmap t7 7gt
+nmap t8 8gt
+nmap t9 9gt
+nmap tn :tabnew<CR>
+nmap tw :tabclose<CR>
+nmap th :tabfirst<CR>
+nmap tj :tabnext<CR>
+nmap tk :tabprev<CR>
+nmap tl :tablast<CR>
+
+" fast switch between split windows
+map <D-j> <C-W>W
+map <D-k> <C-W>w
+" Directly switch between open splitted windows
+map <C-J> <C-W>j
+map <C-H> <C-W>h
+map <C-L> <C-W>l
+map <C-K> <C-W>k
+
+" :W or :WQ == FAIL
+map :W :w
+map :WQ :wq
+
+" turn off F1
+inoremap <F1> <nop>
+nnoremap <F1> <nop>
+vnoremap <F1> <nop>
+
+" inserts new line without going into insert mode
+map <S-Enter> O<ESC>
+map <Enter> o<ESC>
+
+" vertical split then hop to new buffer
+noremap <Leader>v :vsp^M^W^W<cr>
+noremap <Leader>h :split^M^W^W<cr>
+
+" Clear out any search by typing <leader><space>
+nnoremap <leader><space> :noh<cr>
+
+" Smart tab autocomplete behavior
+function! InsertTabWrapper()
+    let col = col('.') - 1
+    if !col || getline('.')[col - 1] !~ '\k'
+        return "\<tab>"
+    else
+        return "\<c-p>"
+    endif
+endfunction
+inoremap <tab> <c-r>=InsertTabWrapper()<cr>
+inoremap <s-tab> <c-n>
+
+
+" --------------------------------------
+" vim-go
+"
+
+let g:go_fmt_command = "goimports"
