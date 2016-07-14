@@ -61,7 +61,7 @@ PROMPT='$(${dotfiles_dir}/script/prompt $?)'
 export CLICOLOR=1
 
 # Shell Theme
-source "${dotfiles_dir}/themes/base16-shell/base16-flat.dark.sh"
+#source "${dotfiles_dir}/themes/base16-shell/base16-3024.dark.sh"
 
 # Actually just here for zsh colored completion
 export LS_COLORS='no=00:fi=00:di=00;34:ln=00;36:pi=40;33:so=00;35:bd=40;33;01:cd=40;33;01:or=01;05;37;41:mi=01;05;37;41:ex=00;35:*.rb=00;31'
