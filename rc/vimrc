@@ -28,7 +28,9 @@ Plugin 'Syntastic'
 Plugin 'tpope/vim-fugitive'
 
 " Colorschemes
-Plugin 'chriskempson/base16-vim'
+"Plugin 'chriskempson/base16-vim'
+Plugin 'wgibbs/vim-irblack'
+Plugin 'vim-scripts/tir_black'
 
 " Syntax & Language Support
 Plugin 'hail2u/vim-css3-syntax'
@@ -54,7 +56,8 @@ Plugin 'edsono/vim-matchit'
 Plugin 'tomtom/tcomment_vim'
 
 " Always last
-Plugin 'bling/vim-airline'
+Plugin 'vim-airline/vim-airline'
+Plugin 'vim-airline/vim-airline-themes'
 
 call vundle#end()
 filetype plugin indent on
@@ -94,8 +97,8 @@ if &t_Co > 2 || has("gui_running")
   set hlsearch
   set bg=dark
   let base16colorspace=256  " Access colors present in 256 colorspace
-  colorscheme base16-flat
-  let g:airline_theme = 'base16'
+  colorscheme ir_black
+  "let g:airline_theme = 'base16'
 endif
 
 if has("gui_macvim")
@@ -134,9 +137,9 @@ set splitbelow splitright           " change split order
 set wildignore=.svn,CVS,.git,*.o,*.a,*.class,*.mo,*.la,*.so,*.obj,*.swp,*.jpg,*.png,*.xpm,*.gif,*.pyc,*.zip,*.gz,*.bz,*.tar,*.avi,*.wmv,*.ogg,*.mp3,*.mov
 
 
-" --------------------------------------
-" Backups
-"
+"" --------------------------------------
+"" Backups
+""
 
 set backup                          " use backups
 set backupdir=~/.vim/tmp            " put backupfiles in ~/.vim/tmp
