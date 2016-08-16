@@ -54,6 +54,7 @@ Plugin 'godlygeek/tabular'
 Plugin 'csexton/trailertrash.vim'
 Plugin 'edsono/vim-matchit'
 Plugin 'tomtom/tcomment_vim'
+Plugin 'alvan/vim-closetag'
 
 " Always last
 Plugin 'vim-airline/vim-airline'
