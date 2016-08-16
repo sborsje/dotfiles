@@ -237,6 +237,7 @@ if [[ "${OSTYPE}" == "darwin"* ]]; then
   export PATH=/Library/Developer/Toolchains/swift-latest.xctoolchain/usr/bin:"${PATH}"
 
   # Set up gpg-agent automatically for every shell
+  export GPG_TTY=$(tty)
   if [ -f ~/.gnupg/.gpg-agent-info ] && [ -n "$(pgrep gpg-agent)" ]; then
     source ~/.gnupg/.gpg-agent-info
     export GPG_AGENT_INFO
