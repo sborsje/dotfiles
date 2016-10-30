@@ -100,12 +100,13 @@ if &t_Co > 2 || has("gui_running")
   let base16colorspace=256  " Access colors present in 256 colorspace
   colorscheme ir_black
   "let g:airline_theme = 'base16'
+  let g:airline_powerline_fonts = 1
 endif
 
 if has("gui_macvim")
-  set guioptions=Ace            " No menubar, toolbar or scrollbars, as minimal as possible
-  set guifont="Source Code Pro":h12 " Get Source Code here: https://github.com/adobe-fonts/source-code-pro/releases/tag/2.010R-ro%2F1.030R-it
-  set linespace=1               " Less spacing between lines
+  set guioptions=Ace                " No menubar, toolbar or scrollbars, as minimal as possible
+  set guifont=Source\ Code\ Pro:h12 " Get Source Code here: https://github.com/adobe-fonts/source-code-pro/releases/tag/2.030R-ro%2F1.050R-it
+  set linespace=1                   " Less spacing between lines
 end
 
 if &term =~ '256color'
