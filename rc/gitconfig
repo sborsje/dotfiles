@@ -24,7 +24,7 @@
   pager = "less -FRXM+Gg"
   whitespace=-indent-with-non-tab,trailing-space,cr-at-eol
 
-[credentials]
+[credential]
   helper = osxkeychain
 
 [diff]
