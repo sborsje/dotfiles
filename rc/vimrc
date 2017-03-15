@@ -52,7 +52,7 @@ Plugin 'mxw/vim-jsx'
 " Other
 Plugin 'godlygeek/tabular'
 Plugin 'csexton/trailertrash.vim'
-Plugin 'edsono/vim-matchit'
+Plugin 'isa/vim-matchit'
 Plugin 'tomtom/tcomment_vim'
 Plugin 'alvan/vim-closetag'
 
