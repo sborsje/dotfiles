@@ -135,6 +135,7 @@ set sidescroll=1                    " side scroll 1 character at a time
 set sidescrolloff=15                " start sidescrolling 15 characters before end of line
 set equalalways                     " multiple windows, when created, are equal in size
 set splitbelow splitright           " change split order
+set mouse=a                         " enable mouse for all modes (fixes scrolling in iTerm)
 
 " Ignore these files when completing names and in Explorer
 set wildignore=.svn,CVS,.git,*.o,*.a,*.class,*.mo,*.la,*.so,*.obj,*.swp,*.jpg,*.png,*.xpm,*.gif,*.pyc,*.zip,*.gz,*.bz,*.tar,*.avi,*.wmv,*.ogg,*.mp3,*.mov
