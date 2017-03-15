@@ -98,6 +98,7 @@ if &t_Co > 2 || has("gui_running")
   set hlsearch
   set bg=dark
   let base16colorspace=256  " Access colors present in 256 colorspace
+  set termguicolors
   colorscheme ir_black
   "let g:airline_theme = 'base16'
   let g:airline_powerline_fonts = 1
