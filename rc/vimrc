@@ -290,3 +290,10 @@ inoremap <s-tab> <c-n>
 "
 
 let g:go_fmt_command = "goimports"
+
+" --------------------------------------
+" vim-jsx
+"
+
+let g:jsx_ext_required = 0 " Allow JSX in normal JS files
+
