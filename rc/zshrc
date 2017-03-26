@@ -197,6 +197,30 @@ alias myips="ifconfig -a | grep -o 'inet6\? \(addr:\)\?\s\?\(\(\([0-9]\+\.\)\{3\
 alias rr="touch tmp/restart.txt"
 
 ########################################
+# AWS
+#
+
+if [ -f ~/.aws/current_profile ]; then
+  source ~/.aws/current_profile
+fi
+
+function awsp {
+  profiles=($(sed -n 's/\[profile \(.*\)\]/\1/p' ~/.aws/config | sort))
+  len=${#profiles[@]}
+
+  for (( i=1; i<=${len}; i++ )); do
+    echo "${i}) ${profiles[$i]}"
+  done
+
+  printf "\nChoose a profile to load: "
+  read choice
+
+  echo "export AWS_DEFAULT_PROFILE=${profiles[$choice]}" > ~/.aws/current_profile
+  source ~/.aws/current_profile
+  echo "Using ${profiles[$choice]}"
+}
+
+########################################
 # TERM TITLE
 #
 
