@@ -48,6 +48,7 @@ Plugin 'wting/rust.vim'
 Plugin 'pangloss/vim-javascript'
 Plugin 'isRuslan/vim-es6'
 Plugin 'mxw/vim-jsx'
+Plugin 'google/vim-ft-bzl'
 
 " Other
 Plugin 'godlygeek/tabular'
@@ -55,6 +56,7 @@ Plugin 'csexton/trailertrash.vim'
 Plugin 'isa/vim-matchit'
 Plugin 'tomtom/tcomment_vim'
 Plugin 'alvan/vim-closetag'
+Plugin 'scrooloose/nerdtree'
 
 " Always last
 Plugin 'vim-airline/vim-airline'
