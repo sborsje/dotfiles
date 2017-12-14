@@ -259,6 +259,8 @@ if [[ "${OSTYPE}" == "darwin"* ]]; then
 
   # Add Swift to path
   export PATH=/Library/Developer/Toolchains/swift-latest.xctoolchain/usr/bin:"${PATH}"
+  # Add Python 3.6
+  export PATH=/Users/sborsje/Library/Python/3.6/bin:"${PATH}"
 fi
 
 
