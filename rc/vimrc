@@ -24,7 +24,7 @@ call vundle#begin()
 
 " Do these first, because other plugins depend on them
 Plugin 'VundleVim/Vundle.vim'
-Plugin 'Syntastic'
+Plugin 'vim-syntastic/syntastic'
 Plugin 'tpope/vim-fugitive'
 
 " Colorschemes
@@ -300,3 +300,23 @@ let g:go_fmt_command = "goimports"
 
 let g:jsx_ext_required = 0 " Allow JSX in normal JS files
 
+" --------------------------------------
+" vim-syntastic
+"
+
+let g:syntastic_always_populate_loc_list = 0
+let g:syntastic_auto_loc_list = 0
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 1
+let g:syntastic_css_checkers = ['stylelint']
+let g:syntastic_sass_checkers = ['stylelint']
+let g:syntastic_scss_checkers = ['stylelint']
+let g:syntastic_error_symbol = '❌'
+let g:syntastic_style_error_symbol = '⁉️'
+let g:syntastic_warning_symbol = '⚠️'
+let g:syntastic_style_warning_symbol = '💩'
+
+highlight link SyntasticErrorSign SignColumn
+highlight link SyntasticWarningSign SignColumn
+highlight link SyntasticStyleErrorSign SignColumn
+highlight link SyntasticStyleWarningSign SignColumn
