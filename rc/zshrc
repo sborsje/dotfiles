@@ -196,6 +196,11 @@ alias myips="ifconfig -a | grep -o 'inet6\? \(addr:\)\?\s\?\(\(\([0-9]\+\.\)\{3\
 
 alias rr="touch tmp/restart.txt"
 
+function dockerimplode {
+  docker stop $(docker ps -a -q)
+  docker system prune -a
+}
+
 ########################################
 # AWS
 #
