@@ -104,7 +104,7 @@ alias dotfiles="cd ${dotfiles_dir}"
 alias please="sudo"
 alias fucking="sudo"
 
-alias ll="ls -alh"
+alias ll="ls -AlhF"
 alias sl="ll"
 alias l="ll"
 
