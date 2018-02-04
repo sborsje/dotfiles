@@ -271,6 +271,7 @@ map <Enter> o<ESC>
 " vertical split then hop to new buffer
 noremap <Leader>v :vsp^M^W^W<cr>
 noremap <Leader>h :split^M^W^W<cr>
+noremap <Leader>q :q<cr>
 
 " Clear out any search by typing <leader><space>
 nnoremap <leader><space> :noh<cr>
