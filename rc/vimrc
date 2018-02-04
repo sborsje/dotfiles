@@ -49,6 +49,7 @@ Plugin 'pangloss/vim-javascript'
 Plugin 'isRuslan/vim-es6'
 Plugin 'mxw/vim-jsx'
 Plugin 'google/vim-ft-bzl'
+Plugin 'leafgarland/typescript-vim'
 
 " Other
 Plugin 'godlygeek/tabular'
