@@ -50,6 +50,7 @@ Plugin 'isRuslan/vim-es6'
 Plugin 'mxw/vim-jsx'
 Plugin 'google/vim-ft-bzl'
 Plugin 'leafgarland/typescript-vim'
+Plugin 'christianrondeau/vim-base64'
 
 " Other
 Plugin 'godlygeek/tabular'
