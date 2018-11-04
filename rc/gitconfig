@@ -33,6 +33,9 @@
 [diff "ruby"]
   funcname = ^ *\\(\\(class\\|module\\|def\\) .*\\)
 
+[fetch]
+	prune = true
+
 [filter "media"]
   clean = git media clean %f
   required = true
