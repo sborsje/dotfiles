@@ -1,69 +1,69 @@
 [alias]
-  aa = add --all
-  br = branch
-  ci = commit
-  co = checkout
-  df = diff
-  l = "!source ~/.githelpers && pretty_git_log"
-  st = status -sb
-  unstage = reset HEAD
-  up = pull
+	aa = add --all
+	br = branch
+	ci = commit
+	co = checkout
+	df = diff
+	l = "!source ~/.githelpers && pretty_git_log"
+	st = status -sb
+	unstage = reset HEAD
+	up = pull
 
 [branch]
-  autosetuprebase = always
+	autosetuprebase = always
 
 [color]
-  branch = auto
-  diff = auto
-  status = auto
-  ui = true
+	branch = auto
+	diff = auto
+	status = auto
+	ui = true
 
 [core]
-  editor = vim
-  excludesfile = ~/.global_gitignore
-  pager = "less -FRXM+Gg"
-  whitespace=-indent-with-non-tab,trailing-space,cr-at-eol
+	editor = vim
+	excludesfile = ~/.global_gitignore
+	pager = "less -FRXM+Gg"
+	whitespace=-indent-with-non-tab,trailing-space,cr-at-eol
 
 [credential]
-  helper = osxkeychain
+	helper = osxkeychain
 
 [diff]
-  renames = copies
+	renames = copies
 
 [diff "ruby"]
-  funcname = ^ *\\(\\(class\\|module\\|def\\) .*\\)
+	funcname = ^ *\\(\\(class\\|module\\|def\\) .*\\)
 
 [fetch]
 	prune = true
 
 [filter "media"]
-  clean = git media clean %f
-  required = true
-  smudge = git media smudge %f
+	clean = git media clean %f
+	required = true
+	smudge = git media smudge %f
 
 [filter "lfs"]
 	clean = git-lfs clean -- %f
-  required = true
+	required = true
 	smudge = git-lfs smudge -- %f
 	process = git-lfs filter-process
 
 [help]
-  autocorrect = 5
+	autocorrect = 5
 
 [merge]
-  tool = opendiff
+	tool = opendiff
 
 [mergetool]
-  keepBackup = false
+	keepBackup = false
 
 [push]
-  default = upstream
+	default = upstream
 
 [url "git@github.com:"]
-  insteadOf = gh:
+	insteadOf = gh:
 
 [url "git@heroku.com:"]
-  insteadOf = heroku:
+	insteadOf = heroku:
 
 [commit]
-  gpgsign = true
+	gpgsign = true
