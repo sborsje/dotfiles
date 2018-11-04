@@ -42,9 +42,10 @@
   smudge = git media smudge %f
 
 [filter "lfs"]
-  clean = git-lfs clean %f
+	clean = git-lfs clean -- %f
   required = true
-  smudge = git-lfs smudge %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
 
 [help]
   autocorrect = 5
