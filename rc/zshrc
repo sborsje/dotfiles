@@ -104,6 +104,8 @@ alias dotfiles="cd ${dotfiles_dir}"
 alias please="sudo"
 alias fucking="sudo"
 
+alias timestamp="date +%Y%m%d%H%M%S"
+
 alias ll="ls -AlhF"
 alias sl="ll"
 alias l="ll"
