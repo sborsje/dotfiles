@@ -65,5 +65,8 @@
 [url "git@heroku.com:"]
 	insteadOf = heroku:
 
+[url "ssh://git@github.com/"]
+  insteadOf = https://github.com/
+
 [commit]
 	gpgsign = true
